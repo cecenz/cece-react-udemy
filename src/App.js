@@ -4,25 +4,17 @@ import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
-  state = {
-    usernames: [
-      { username: 'cc' }
-    ]
-  }
+  state = { username: 'cc' }
 
   changeUsernameHander = (event) => {
-    this.setState({
-      usernames: [
-        { username: event.target.value }
-      ]   
-    })
+    this.setState({ username: event.target.value })
   }
 
   render() {
     return (
       <div className="App">
-        <UserOutput username={this.state.usernames[0].username} />
-        <UserInput changeUsername={this.changeUsernameHander} username={this.state.usernames[0].username} />
+        <UserOutput username={this.state.username} />
+        <UserInput changeUsername={this.changeUsernameHander} username={this.state.username} />
       </div>
     );
   }
