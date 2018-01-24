@@ -3,9 +3,9 @@ import React from 'react';
 
 const UserOutput = (props) => {
     return (
-        <div>
-            <p>Username 1: {props.username.name}</p>
-            <p>Username 2: Matt</p>
+        <div className='Userblock'>
+            <p>Current Username:</p>
+            <p>{props.username}</p>
         </div>
     )
 }

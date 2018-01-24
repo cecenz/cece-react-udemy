@@ -1,9 +1,11 @@
 import React from 'react';
+import './UserInput.css';
 
 const UserInput = (props) => {
     return (
-        <div>
-            <input type="submit" value="Submit"></input>
+        <div className='Userblock Userinput'>
+            <p><label>Change username:</label></p>
+            <p><input onChange={props.changeUsername} value={props.username} type="text" name="name" /></p>
         </div>
     )
 }
