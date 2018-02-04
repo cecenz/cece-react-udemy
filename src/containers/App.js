@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Cockpit from '../components/Cockpit/Cockpit';
+import Persons from '../components/Persons/Persons';
 
 class App extends Component {
     state = {
@@ -56,27 +56,22 @@ class App extends Component {
     }
 
     render() {
-
         let persons = null;
         if (this.state.showPersons) {
             persons = (
-                <div>
-                {this.state.persons.map((person, index) => {
-                    return <Person 
-                        click={() => this.deletePersonHandler(index)}
-                        name={person.name} 
-                        age={person.age}
-                        key={person.id}>
-                        change={(event) => this.changeNameHander(event, person.id)} />
-                    </ErrorBoundary>
-                })}
-                </div> 
+                <Persons
+                    persons={this.state.persons}
+                    clicked={this.deletePersonHandler}
+                    changed={this.changeNameHander}
+                />
             );
         }
         return (
             <div className="App">
-                <h1>Hello</h1>
-                <button onClick={this.togglePersonHandler}>Toggle Persons</button>
+                <Cockpit 
+                    clicked={this.togglePersonHandler} 
+                    persons={this.state.persons}
+                />
                 {persons}
             </div>
         );

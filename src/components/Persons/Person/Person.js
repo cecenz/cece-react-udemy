@@ -10,5 +10,4 @@ const person = (props) => {
         </div>
     )
 }
-
 export default person;
