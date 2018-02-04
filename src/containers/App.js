@@ -4,6 +4,20 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Persons from '../components/Persons/Persons';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        console.log('[App.js] Inside constructor', props);
+
+    }
+
+    componentWillMount() {
+        console.log('[App.js] Inside componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('[App.js] Inside componentDidMount');
+    }
+
     state = {
         persons: [
             { id: 'agesg', name: 'Maximillian', age: 28 },
@@ -14,15 +28,6 @@ class App extends Component {
     };
 
     deletePersonHandler = (personIndex) => {
-        /* Without the slice, we are manipulating the original
-        source of truth - not good practice, so using slice
-        will create a copy you can update. */
-
-        // const persons = this.state.persons.slice();
-
-        /* OR
-        you can use the spread operator
-        */
         const persons = [...this.state.persons];
 
         persons.splice(personIndex, 1);
@@ -30,23 +35,15 @@ class App extends Component {
     }
 
     changeNameHander = (event, id) => {
-        // Locate the person that we want to update
         const personIndex = this.state.persons.findIndex(p => {
             return p.id === id;
         })
-        // Manipulating the current state:
-        // const person = this.state.persons[personIndex];
-
-        // Creating a 'copy' of the particular person we want to manipulate
         const person = {
             ...this.state.persons[personIndex]
         };
         person.name = event.target.value;
-        // Create a copy of the persons object
         const persons = [...this.state.persons];
-        // Insert our new manipulated person name
         persons[personIndex] = person;
-        // Return the new object with the new name
         this.setState( {persons: persons} );
     }
 
@@ -56,6 +53,7 @@ class App extends Component {
     }
 
     render() {
+        console.log('[App.js] Inside Render');
         let persons = null;
         if (this.state.showPersons) {
             persons = (
@@ -69,6 +67,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Cockpit 
+                    appTitle={this.props.title} // <- using this.props because this is coming from Index.js
                     clicked={this.togglePersonHandler} 
                     persons={this.state.persons}
                 />
