@@ -1,43 +1,46 @@
 import React, { Component } from 'react';
-import './Person.css';
+import PropTypes from 'prop-types';
+
+import classes from './Person.css';
+import withClass from '../../../hoc/WithClass';
+import Aux from '../../../hoc/Aux';
 
 class Person extends Component {
-    constructor(props) {
-        super(props);
-        console.log('[Person.js] Inside constructor', props);
-    
-    }
-    
-    componentWillMount() {
-        console.log('[Person.js] Inside componentWillMount');
-    }
-    
-    componentDidMount() {
-        console.log('[Person.js] Inside componentDidMount');
+    constructor( props ) {
+        super( props );
+        console.log( '[Person.js] Inside Constructor', props );
     }
 
-
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('[UPDATE Persons.js] Inside shouldComponentUpdate', nextProps );
-        return false;
+    componentWillMount () {
+        console.log( '[Person.js] Inside componentWillMount()' );
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        console.log('[UPDATE Persons.js] Inside componentWillUpdate', nextProps )
+    componentDidMount () {
+        console.log( '[Person.js] Inside componentDidMount()' );
     }
 
-    componentDidUpdate() {
-        console.log('[UPDATE Persons.js] Inside componentDidUpdate' )
-    }
-    render() {
-        console.log('[Person.js] Inside render')
+    render () {
+        console.log( '[Person.js] Inside render()' );
         return (
-            <div className='person'>
-                <p onClick={this.props.click}>I am {this.props.name} and I am {this.props.age} years old</p>
+            <Aux>
+                <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.change} value={this.props.name}  />
-            </div>
+                <input type="text" onChange={this.props.changed} value={this.props.name} />
+            </Aux>
         )
+        // return [
+        //     <p key="1" onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old!</p>,
+        //     <p key="2">{this.props.children}</p>,
+        //     <input key="3" type="text" onChange={this.props.changed} value={this.props.name} />
+        // ]
     }
 }
-export default Person;
+
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func 
+};
+
+export default withClass(Person, classes.Person);
